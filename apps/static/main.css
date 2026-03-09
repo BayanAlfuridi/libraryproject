@@ -1,0 +1,85 @@
+/* Make links full width block */
+a {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+/* First link - green background */
+#link1 {
+    background-color: #a5d6a7;
+    color: red;
+}
+
+/* Second link - dark gray background */
+#link2 {
+    background-color: #555555;
+    color: yellow;
+}
+
+/* Third link - black background */
+#link3 {
+    background-color: black;
+    color: white;
+}
+
+/* Hover effect */
+a:hover {
+    opacity: 0.8;
+}
+
+/* Active effect */
+a:active {
+    background-color: orange;
+}
+
+/* Visited effect */
+a:visited {
+    color: purple;
+}
+
+.format-title {
+    background-color: #d9d6bf;
+    padding: 15px;
+    color: green;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    background-color: #5f9ea0;   
+    color: white;
+    padding: 12px;
+    margin: 0;
+}
+
+ul {
+    padding: 20px;
+}
+table{
+border-collapse: collapse;
+margin:auto;
+}
+
+td, th{
+border:1px solid black;
+padding:6px;
+text-align:center;
+}
+
+h3{
+text-align:center;
+}
+
+.table1{
+width:200px;
+}
+
+.table2{
+width:700px;
+}
