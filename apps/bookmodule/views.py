@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
-from django.shortcuts import render
+from .models import Book
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -59,3 +58,26 @@ def __getBooksList():
     book2 = {'id':56788765,'title':'Reversing: Secrets of Reverse Engineering', 'author':'E. Eilam'}
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
+
+def add_books(request):
+    if Book.objects.count() == 0:  # إذا ما فيه بيانات
+        Book.objects.create(title='AI and Data Science', author='Ali', price=150, edition=3)
+        Book.objects.create(title='Python and Django', author='Sara', price=120, edition=2)
+        Book.objects.create(title='Algorithms and Data Structures', author='Khalid', price=200, edition=4)
+
+    return render(request, 'bookmodule/index.html')
+
+    return render(request, 'bookmodule/index.html')
+def simple_query(request):
+    mybooks = Book.objects.filter(title__icontains='and')
+    return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+
+
+def complex_query(request):
+    mybooks = Book.objects.filter(
+        author__isnull=False,
+        title__icontains='and',
+        edition__gte=2
+    ).exclude(price__lte=100)[:10]
+
+    return render(request, 'bookmodule/bookList.html', {'books': mybooks})
