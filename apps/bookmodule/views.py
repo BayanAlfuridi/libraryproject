@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
-from .models import Book
+from .models import *
 from django.db.models import Count, Sum, Avg, Max, Min
 from django.db import models
 from django.db.models import Count
@@ -124,3 +124,47 @@ def task5(request):
 def task7(request):
     data = Student.objects.values('address__city').annotate(count=Count('id'))
     return render(request, 'bookmodule/task7.html', {'data': data})
+
+def Task1(request):
+    books = Book.objects.all()
+    total_quantity = sum(book.quantity for book in books)
+
+    for book in books:
+        book.availability = (book.quantity / total_quantity * 100) if total_quantity else 0
+
+    return render(request, 'bookmodule/Task1.html', {'books': books})
+
+def Task2(request):
+    publishers = Publisher.objects.annotate(
+        total_stock=Sum('book__quantity')
+    )
+    return render(request, 'bookmodule/Task2.html', {'publishers': publishers})
+
+def Task3(request):
+    publishers = Publisher.objects.annotate(
+        oldest_book=Min('book__pubdate')
+    )
+    return render(request, 'bookmodule/Task3.html', {'publishers': publishers})
+
+def Task4(request):
+    publishers = Publisher.objects.annotate(
+        avg_price=Avg('book__price'),
+        min_price=Min('book__price'),
+        max_price=Max('book__price')
+    )
+    return render(request, 'bookmodule/Task4.html', {'publishers': publishers})
+
+def Task5(request):
+    publishers = Publisher.objects.annotate(
+        high_rated_books=Count('book', filter=Q(book__rating__gte=4))
+    )
+    return render(request, 'bookmodule/Task5.html', {'publishers': publishers})
+
+def Task6(request):
+    publishers = Publisher.objects.annotate(
+        filtered_books=Count(
+            'book',
+            filter=Q(book__price__gt=50, book__quantity__lt=5, book__quantity__gte=1)
+        )
+    )
+    return render(request, 'bookmodule/Task6.html', {'publishers': publishers})

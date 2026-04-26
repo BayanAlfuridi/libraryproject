@@ -4,16 +4,14 @@
     <title>Task 5</title>
 </head>
 <body>
+    <h2>Highly Rated Books Count</h2>
 
-<h2>Books Statistics</h2>
-
-<ul>
-    <li>Total Books: {{ stats.total_books }}</li>
-    <li>Total Price: {{ stats.total_price }}</li>
-    <li>Average Price: {{ stats.avg_price }}</li>
-    <li>Max Price: {{ stats.max_price }}</li>
-    <li>Min Price: {{ stats.min_price }}</li>
-</ul>
+    {% for pub in publishers %}
+        <p>
+            {{ pub.name }} |
+            High Rated Books: {{ pub.high_rated_books }}
+        </p>
+    {% endfor %}
 
 </body>
 </html>

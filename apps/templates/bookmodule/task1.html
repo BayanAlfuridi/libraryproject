@@ -4,16 +4,15 @@
     <title>Task 1</title>
 </head>
 <body>
+    <h2>Books Availability</h2>
 
-<h2>Books with Price ≤ 80</h2>
-
-<ul>
-{% for book in books %}
-    <li>{{ book.title }} - {{ book.author }} - {{ book.price }}</li>
-{% empty %}
-    <li>No books found</li>
-{% endfor %}
-</ul>
+    {% for book in books %}
+        <p>
+            {{ book.title }} |
+            Quantity: {{ book.quantity }} |
+            Availability: {{ book.availability|floatformat:2 }}%
+        </p>
+    {% endfor %}
 
 </body>
 </html>

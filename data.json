@@ -1,0 +1,47 @@
+[
+  {
+    "model": "bookmodule.publisher",
+    "pk": 1,
+    "fields": {
+      "name": "OReilly",
+      "location": "USA"
+    }
+  },
+  {
+    "model": "bookmodule.publisher",
+    "pk": 2,
+    "fields": {
+      "name": "Penguin",
+      "location": "UK"
+    }
+  },
+  {
+    "model": "bookmodule.author",
+    "pk": 1,
+    "fields": {
+      "name": "Author 1",
+      "DOB": "1990-01-01"
+    }
+  },
+  {
+    "model": "bookmodule.author",
+    "pk": 2,
+    "fields": {
+      "name": "Author 2",
+      "DOB": "1985-05-05"
+    }
+  },
+  {
+    "model": "bookmodule.book",
+    "pk": 1,
+    "fields": {
+      "title": "Book 1",
+      "price": 60,
+      "quantity": 3,
+      "pubdate": "2024-01-01T10:00:00Z",
+      "rating": 5,
+      "publisher": 1,
+      "authors": [1, 2]
+    }
+  }
+]
