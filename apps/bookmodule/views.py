@@ -8,6 +8,9 @@ from .models import Student
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book, Publisher, Author
 from .forms import BookForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Student, Student2, Club
+from .forms import StudentForm, Student2Form, ClubForm
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -272,3 +275,116 @@ def delete_book_part2(request, id):
     book = get_object_or_404(Book, id=id)
     book.delete()
     return redirect('list_books_part2')
+
+
+
+
+# =========================
+# Task 1
+# =========================
+
+def student_list(request):
+    students = Student.objects.all()
+    return render(request, 'bookmodule/lab11/student_list.html', {'students': students})
+
+
+def student_add(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm()
+
+    return render(request, 'bookmodule/lab11/student_form.html', {'form': form})
+
+
+def student_update(request, id):
+    student = get_object_or_404(Student, id=id)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm(instance=student)
+
+    return render(request, 'bookmodule/lab11/student_form.html', {'form': form})
+
+
+def student_delete(request, id):
+    student = get_object_or_404(Student, id=id)
+
+    if request.method == 'POST':
+        student.delete()
+        return redirect('student_list')
+
+    return render(request, 'bookmodule/lab11/student_delete.html', {'student': student})
+
+
+# =========================
+# Task 2
+# =========================
+
+def student2_list(request):
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/lab11/student2_list.html', {'students': students})
+
+
+def student2_add(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student2_list')
+    else:
+        form = Student2Form()
+
+    return render(request, 'bookmodule/lab11/student2_form.html', {'form': form})
+
+
+def student2_update(request, id):
+    student = get_object_or_404(Student2, id=id)
+
+    if request.method == 'POST':
+        form = Student2Form(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student2_list')
+    else:
+        form = Student2Form(instance=student)
+
+    return render(request, 'bookmodule/lab11/student2_form.html', {'form': form})
+
+
+def student2_delete(request, id):
+    student = get_object_or_404(Student2, id=id)
+
+    if request.method == 'POST':
+        student.delete()
+        return redirect('student2_list')
+
+    return render(request, 'bookmodule/lab11/student2_delete.html', {'student': student})
+
+
+# =========================
+# Task 3
+# =========================
+
+def club_list(request):
+    clubs = Club.objects.all()
+    return render(request, 'bookmodule/lab11/club_list.html', {'clubs': clubs})
+
+
+def club_add(request):
+    if request.method == 'POST':
+        form = ClubForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('club_list')
+    else:
+        form = ClubForm()
+
+    return render(request, 'bookmodule/lab11/club_form.html', {'form': form})

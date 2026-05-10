@@ -1,0 +1,14 @@
+<h1>Clubs</h1>
+
+<a href="{% url 'club_add' %}">Add Club</a>
+
+{% for club in clubs %}
+    <h3>{{ club.name }}</h3>
+    <p>{{ club.description }}</p>
+
+    {% if club.image %}
+        <img src="{{ club.image.url }}" width="200">
+    {% endif %}
+
+    <hr>
+{% endfor %}
