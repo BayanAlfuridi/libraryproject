@@ -11,6 +11,10 @@ from .forms import BookForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student, Student2, Club
 from .forms import StudentForm, Student2Form, ClubForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -327,11 +331,10 @@ def student_delete(request, id):
 # =========================
 # Task 2
 # =========================
-
+@login_required
 def student2_list(request):
     students = Student2.objects.all()
     return render(request, 'bookmodule/lab11/student2_list.html', {'students': students})
-
 
 def student2_add(request):
     if request.method == 'POST':
@@ -343,7 +346,6 @@ def student2_add(request):
         form = Student2Form()
 
     return render(request, 'bookmodule/lab11/student2_form.html', {'form': form})
-
 
 def student2_update(request, id):
     student = get_object_or_404(Student2, id=id)
@@ -357,7 +359,6 @@ def student2_update(request, id):
         form = Student2Form(instance=student)
 
     return render(request, 'bookmodule/lab11/student2_form.html', {'form': form})
-
 
 def student2_delete(request, id):
     student = get_object_or_404(Student2, id=id)
@@ -373,18 +374,12 @@ def student2_delete(request, id):
 # Task 3
 # =========================
 
+
+@login_required
 def club_list(request):
-    clubs = Club.objects.all()
-    return render(request, 'bookmodule/lab11/club_list.html', {'clubs': clubs})
+    return render(request, 'bookmodule/club_list.html')
 
 
+@login_required
 def club_add(request):
-    if request.method == 'POST':
-        form = ClubForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('club_list')
-    else:
-        form = ClubForm()
-
-    return render(request, 'bookmodule/lab11/club_form.html', {'form': form})
+    return render(request, 'bookmodule/club_add.html')

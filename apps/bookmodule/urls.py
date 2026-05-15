@@ -50,4 +50,9 @@ urlpatterns = [
     # Task 3
     path('bookmodule/lab11/clubs/', views.club_list, name='club_list'),
     path('bookmodule/lab11/clubs/add/', views.club_add, name='club_add'),
+
+
 ]
+
+
+
